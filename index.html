@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScamFinder</title>
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f7f7f7;
+            transition: background-color 0.5s;
+        }
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #333333;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="container">
+    <h1>ScamFinder</h1>
+    <form id="urlForm">
+        <input type="text" id="urlInput" placeholder="Enter website URL" required>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+<!-- PyScript Code -->
+<py-script>
+from js import document, window
+
+def process_url(event):
+    event.preventDefault()  # Prevent the default form submission
+    url = document.getElementById('urlInput').value  # Get the URL from the input field
+    # Open a new window and write the URL to it
+    new_window = window.open('', '_blank')  # Open a new blank window
+    new_window.document.write(f"<html><body><h1>Submitted URL</h1><p>{url}</p></body></html>")  # Write content to the new window
+
+# Add event listener to the form
+document.getElementById('urlForm').addEventListener('submit', process_url)
+</py-script>
+
+</body>
+</html>
